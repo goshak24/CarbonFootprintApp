@@ -4,15 +4,16 @@ import React from 'react';
 const { width, height } = Dimensions.get('window');
 
 const InputOption = ({ value, setter, imageSource, activeUnit, setActiveUnit }) => {
-  const renderUnitButtons = () => {
-    const units = {
-      'Miles': ['Miles', 'Km'],
-      'kWh': ['kWh'],
-      'Therms': ['Therms'],
-      'kg': ['kg']
-    };
+  const units = {
+    'Miles': ['Miles', 'Km'],
+    'kWh': ['kWh'],
+    'Therms': ['Therms'],
+    'kg': ['kg']
+  };
 
-    return units[activeUnit].map(unit => (
+  const renderUnitButtons = () => {
+    const availableUnits = units[activeUnit] || units['Miles']; // Default to 'Miles' if activeUnit is not found
+    return availableUnits.map(unit => (
       <TouchableOpacity
         key={unit}
         style={[styles.unitButton, activeUnit === unit && styles.unitButtonActive]}
